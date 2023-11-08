@@ -63,6 +63,10 @@ module.exports = {
           'sass-loader'
         ]
       },
+      {
+        test: /\.md$/,
+        use: 'raw-loader'
+      }
     ]
   },
   plugins: [
