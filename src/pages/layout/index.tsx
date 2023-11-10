@@ -20,7 +20,7 @@ const Layout = () => {
 
   const tabs = [
     {
-      key: '/home',
+      key: '/blog',
       title: '首页',
       icon: <AppOutline />
     },

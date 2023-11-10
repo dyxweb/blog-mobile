@@ -4,7 +4,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from '@/pages/layout';
-import Home from '@/pages/home';
+import BlogList from '@/pages/blogList';
+import BlogDetail from '@/pages/blogDetail';
 import My from '@/pages/my';
 
 const App = () => {
@@ -12,10 +13,11 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/home" />} />
-          <Route path="home" element={<Home />} />
+          <Route index element={<Navigate to="/blog" />} />
+          <Route path="blog" element={<BlogList />} />
           <Route path="my" element={<My />} />
         </Route>
+        <Route path="/blog/:category/:blog" element={<BlogDetail />} />
       </Routes>
     </BrowserRouter>
   );

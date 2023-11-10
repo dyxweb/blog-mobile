@@ -1,5 +1,5 @@
 /**
- * Home
+ * 文章列表
  */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -31,12 +31,12 @@ mdData.keys().forEach((item: any) => {
   }
 });
 
-const Home = () => {
+const BlogList = () => {
   const navigate = useNavigate();
 
   // 点击文章标题跳转
   const onBlogClick = (key: string) => {
-    navigate(`/home${key}`);
+    navigate(`/blog${key}`);
   };
   return (
     <Collapse accordion>
@@ -57,4 +57,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default BlogList;
