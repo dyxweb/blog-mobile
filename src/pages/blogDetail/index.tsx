@@ -6,10 +6,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { NavBar } from 'antd-mobile';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import styleConfig from '@/styles/common.scss';
 import 'github-markdown-css';
+import styleConfig from '@/styles/common.scss';
 import styles from './index.scss';
 
 const BlogDetail = () => {
@@ -34,6 +35,7 @@ const BlogDetail = () => {
           // 类名必须有
           className="markdown-body"
           remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
           components={{
             code(props: any) {
               const { children, ...rest } = props;
