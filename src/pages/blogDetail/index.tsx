@@ -1,19 +1,22 @@
 /**
  * 文章详情
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { NavBar } from 'antd-mobile';
+import { UnorderedListOutline } from 'antd-mobile-icons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import 'github-markdown-css';
+import NavList from './components/navList';
 import styleConfig from '@/styles/common.scss';
 import styles from './index.scss';
 
 const BlogDetail = () => {
+  const [navVisible, setNavVisible] = useState(false); // 目录是否显示
   const { category, blog } = useParams();
   const navigate = useNavigate();
 
@@ -24,6 +27,12 @@ const BlogDetail = () => {
     <div className={styles.blogDetail}>
       <NavBar
         onBack={() => navigate(-1)}
+        right={
+          <UnorderedListOutline
+            style={{ fontSize: 24 }}
+            onClick={() => setNavVisible(true)}
+          />
+        }
         style={{
           '--border-bottom': `1px ${styleConfig.backColor} solid`
         }}
@@ -55,6 +64,7 @@ const BlogDetail = () => {
           {blogContent}
         </ReactMarkdown>
       </div>
+      <NavList onClose={() => setNavVisible(false)} visible={navVisible} />
     </div>
   );
 };
