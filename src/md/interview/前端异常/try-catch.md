@@ -1,6 +1,7 @@
 ## try-catch
 - try-catch中不要写入太多的代码(声明太多的变量)，最好是把要执行的代码放在另一个function中，在try-catch中调用这个function。
 - 在代码进入try-catch的时候js引擎会拷贝当前的词法环境，拷贝的其实就是当前scope下的所有的变量，会有较大的性能消耗。
+- catch语句不要忽略，避免空的catch块。
 - try-catch捕获异常并可以使后续代码正常运行，try代码块的内容在出错之后不会再继续执行，但是不影响try-catch代码块之后的代码执行。
 ```
 try {

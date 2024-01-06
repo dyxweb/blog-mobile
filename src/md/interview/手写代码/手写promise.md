@@ -1,11 +1,11 @@
 ## [手写Promise](https://juejin.cn/post/6945319439772434469)
 ### 基本功能
-1. Promise 是一个类，在执行这个类的时候会传入一个执行器，这个执行器会立即执行,执行器会传入内部的resolve和reject方法供调用的时候使用
+1. Promise是一个类，在执行这个类的时候会传入一个执行器，这个执行器会立即执行，执行器会传入内部的resolve和reject方法供调用的时候使用。
 ```
 class MyPromise {
   constructor(executor){
     // 立即执行并传入resolve和reject方法
-    executor(this.resolve, this.reject) 
+    executor(this.resolve, this.reject);
   }
 
   // 用箭头函数就可以让this指向当前实例对象
@@ -16,8 +16,8 @@ class MyPromise {
   reject = () => {}
 }
 ```
-2. Promise 会有三种状态Pending 等待, Fulfilled 完成, Rejected 失败,状态只能由 Pending --> Fulfilled 或者 Pending --> Rejected，且一但发生改变便不可二次修改
-3. Promise 中使用 resolve 和 reject 两个函数来更改状态；
+2. Promise会有三种状态Pending 等待, Fulfilled 完成, Rejected 失败，状态只能由 Pending --> Fulfilled 或者 Pending --> Rejected，且一但发生改变便不可二次修改。
+3. Promise中使用resolve和reject两个函数来更改状态。
 ```
 // 先定义三个常量表示状态
 const PENDING = 'pending';
@@ -63,7 +63,7 @@ class MyPromise {
   }
 }
 ```
-4. then 方法内部做的事情就是状态判断,如果状态是成功，调用成功回调函数, 如果状态是失败，调用失败回调函数
+4. then方法内部做的事情就是状态判断，如果状态是成功，调用成功回调函数，如果状态是失败，调用失败回调函数。
 ```
 then(onFulfilled, onRejected) {
   // 判断状态
@@ -186,7 +186,7 @@ reject = (reason) => {
 }
 ```
 ### then方法的链式调用
-> then 方法要链式调用就需要返回一个 Promise 对象。then 方法里面 return 一个返回值作为下一个 then 方法的参数，如果是 return 一个 Promise 对象，那么就需要判断它的状态。
+> then方法要链式调用就需要返回一个Promise对象。then方法里面return一个返回值作为下一个then方法的参数，如果是return一个Promise对象，那么就需要判断它的状态。
 
 ```
 class MyPromise {
@@ -225,10 +225,10 @@ function resolvePromise(x, resolve, reject) {
 }
 ```
 ### then方法判断是否返回自己
-> 如果 then 方法返回的是自己的 Promise 对象，则会发生循环调用，这个时候程序会报错
+> 如果then方法返回的是自己的Promise对象，则会发生循环调用，这个时候程序会报错
 
-1. 判断返回的Promise是否等于自己，如果等于自己抛错
-2. 判断的过程在Promise的运行过程中，此时无法获取到返回的Promise，所以判断的过程需要创建微任务queueMicrotask(可以使用setTimeout来代替)来处理，保证可以获取到返回的Promise
+1. 判断返回的Promise是否等于自己，如果等于自己抛错。
+2. 判断的过程在Promise的运行过程中，此时无法获取到返回的Promise，所以判断的过程需要创建微任务queueMicrotask(可以使用setTimeout来代替)来处理，保证可以获取到返回的Promise。
 ```
 class MyPromise {
   // ......
@@ -266,7 +266,7 @@ function resolvePromise(promise2, x, resolve, reject) {
   }
 }
 ```
-### 参考 fulfilled 状态下的处理方式，对 rejected 和 pending 状态进行改造
+### 参考fulfilled状态下的处理方式，对rejected和pending状态进行改造
 ```
 then(onFulfilled, onRejected) {
   // 为了链式调用这里直接创建一个 MyPromise，并在后面 return 出去
@@ -329,7 +329,7 @@ then(onFulfilled, onRejected) {
 }
 ```
 ### then方法的参数可选
-> then方法的参数可以不传或者单传都不影响执行，then方法的参数进行判断，没有传入参数时执行默认的方法
+> then方法的参数可以不传或者单传都不影响执行，then方法的参数进行判断，没有传入参数时执行默认的方法。
 
 ```
 then(onFulfilled, onRejected) {
@@ -341,8 +341,8 @@ then(onFulfilled, onRejected) {
 }
 ```
 ### 捕获错误
-1. 捕获执行器中的代码，如果执行器中有代码错误(外部调用的语法)，那么 Promise 的状态要变为失败
-2. then方法执行时捕获错误
+1. 捕获执行器中的代码，如果执行器中有代码错误(外部调用的语法)，那么Promise的状态要变为失败。
+2. then方法执行时捕获错误。
 ```
 // 执行器捕获错误
 constructor(executor) {
@@ -385,7 +385,7 @@ then(onFulfilled, onRejected) {
 }
 ```
 ### resolve和reject的静态调用
-> 在Promise类中使用static关键字实现resolve和reject方法，方法的内部就是调用new Promise((resolve, reject) => {})
+> 在Promise类中使用static关键字实现resolve和reject方法，方法的内部就是调用new Promise((resolve, reject) => {})。
 
 ```
 // resolve 静态方法
@@ -568,8 +568,8 @@ function resolvePromise (promise2, x, resolve, reject) {
 module.exports = MyPromise;
 ```
 ### Promise.resolve
-- Promise.resolve最终结果还是一个Promise，并且与Promise.resolve(该值)传入的值息息相关
-- 传入的参数可以是一个Promise实例，那么该函数执行的结果是直接将实例返回
+- Promise.resolve最终结果还是一个Promise，并且与Promise.resolve(该值)传入的值息息相关。
+- 传入的参数可以是一个Promise实例，那么该函数执行的结果是直接将实例返回。
 - 如果这个值是thenable（即带有"then" 方法），返回的promise会“跟随”这个thenable的对象，采用它的最终状态；否则返回的promise将以此值完成。
 ```
 Promise.resolve = function(value) {
@@ -664,7 +664,7 @@ Promise.race = function(promiseArr) {
   })
 }
 ```
-### Promise 并行限制
+### Promise并行限制
 ```
 class Scheduler {
   constructor() {

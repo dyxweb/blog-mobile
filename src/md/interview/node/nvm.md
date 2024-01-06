@@ -6,8 +6,7 @@
 - nvm install 6.10.0 安装指定版本
 - nvm uninstall 6.10.0 卸载指定版本
 - nvm use 6.10.0 使用指定版本
-
-### nvm安装node之后 npm找不到
+### nvm安装node之后npm找不到
 > 打开nvm文件夹下的settings.txt文件，在最后添加以下代码。
 
 ```

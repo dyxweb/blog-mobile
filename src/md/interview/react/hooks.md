@@ -99,6 +99,8 @@ useEffect(() => {
 })
 ```
 - componentDidMount注册事件，componentWillUnmount销毁事件
+> removeEventListener传入的事件处理函数必须和addEventListener传入的事件处理函数是相同的，只有传入相同的事件处理函数才能正常解除事件绑定。要特别注意函数组件执行就会形成一个闭包的Capture Value特性。
+
 ```
 const func = () => {
   console.log('func');
@@ -391,6 +393,9 @@ export default DemoTwo;
 ## useReducer
 > useReducer接受的第一个参数是一个函数，我们可以认为它就是一个reducer，reducer的参数就是常规reducer里面的state和action，返回改变后的state，useReducer第二个参数为state的初始值。返回一个数组，数组的第一项就是更新之后state的值，第二个参数是派发更新的dispatch函数。
 
+- dispatch调用后，状态更新是异步的，因此立刻读取状态仍是旧的。
+- React对dispatch有一个优化机制：如果dispatch触发更新前后的值相等(使用Object.is判断)，出于性能考虑React不会进行重新渲染。
+- 在reducer里面更新对象和数组的状态，需要创建一个新的对象或数组，而不是在原对象和数组上修改，这一点和useState是一样的。
 ```
 import React, { useReducer } from 'react';
 

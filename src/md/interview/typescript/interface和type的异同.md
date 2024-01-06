@@ -20,7 +20,7 @@ type User = {
 
 type SetUser = (name: string, age: number) => void;
 ```
-#### interface 和 type 都可以继承。可以相互集成
+#### interface 和 type 都可以继承。可以相互继承
 - interface 继承 interface
 ```
 interface Person {

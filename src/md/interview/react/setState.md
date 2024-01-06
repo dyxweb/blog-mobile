@@ -85,3 +85,11 @@ function scheduleUpdateOnFiber(fiber, lane, eventTime) {
 
 - 直接调用setState，无参数也会重新渲染。
 - 新state和老state完全一致也会重新渲染(useState更新相同的状态不会重新渲染)。
+### React 18中setState自动批处理
+- 自动批处理是指React将多次setState会被合并为1次执行。
+- 在React 18之前，React只会在合成事件和生命周期钩子函数中使用批处理，而在Promise、setTimeout、setInterval、原生事件是不会自动批处理的。
+- 在React 18中所有的状态更新都会自动使用批处理。如果在某种场景下不想使用批处理，可以通过flushSync来强制立即执行(比如需要在状态更新后，立刻读取新DOM上的数据等)。
+### setState为什么设计成异步 
+- 保证state和props的一致性
+  1. props必然是异步的, 因为只有当父组件重渲染了才知道props是什么，那么保证props和state一致性就很重要了, 因为实际开发中经常会将状态提升到父组件和兄弟组件进行共享, 如果state和props表现不一致那么这个操作很大概率就会引起一些bug。
+- 提高性能：在渲染前会有意地进行等待, 直到所有在组件的事件处理函数内调用的setState()完成之后,统一更新 state, 这样可以通过避免不必要的重新渲染来提升性能。

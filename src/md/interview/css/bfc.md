@@ -6,7 +6,6 @@
 - position的值是absolute、fixed
 - display的值是inline-block、flow-root、table-cell、table-caption、flex或者inline-flex、grid或者inline-grid
 - overflow的值不是visible
-
 ### bfc的作用
 - 用BFC包住浮动的子元素，子元素浮动，脱离了普通文档流，父元素包不住子元素。
   1. 父元素浮动

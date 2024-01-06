@@ -18,6 +18,7 @@
 > webpack中只要通过设置devtool的选项配置即可，值类型包括以下类型的组合。
 
 - none（默认值）
+  1. 不会生成map文件。
 - eval
   1. 会生成被eval函数包裹的模块内容，并在其中通过注释来注明是源文件位置，其中的sourceUrl是用来来指定文件名。
   2. 优点是快因为不用生成.map文件，并且运行时代码映射到开发时代码只需要提供对应的源文件地址。
@@ -46,17 +47,46 @@
   2. nosources则是在能够保证文件路径可以准确建立映射的情况下，就可以把sourceContent的内容给去除掉，使得.map文件体积能够更小一些。
 ![sourcemapNosources](./img/sourcemapNosources.jpg)
 ![sourcemapNosourcesCompare](./img/sourcemapNosourcesCompare.jpg)
-### 建议使用
+### 生产环境建议使用
 > 生产环境下为了防止别人获取源代码，通常不会将sourcemap文件上传到静态资源服务器，而是上传到内部服务器上。当用户触发js错误时，通过前端监控系统或者其他手段收集到出错信息，然后根据内部服务器的sourcemap结合出错信息，找到出错的源代码位置。
 
-- cheap-module-source-map (开发环境建议使用)
-> 打包编译速度快，只包含代码行映射，没有代码列映射。
+- source-map
+  1. map文件包含完整的原始代码，但是打包会很慢。打包后的js最后一行是map文件地址的注释。
+  2. 生产环境报错会正确提示错误的行数、列数，会显示源代码。source面板会显示源代码目录结构和代码。
+- nosources-source-map
+  1. 生成的map文件不包含源码。
+  2. 生产环境报错会正确提示错误的行数。source面板会显示源代码目录结构和文件名，不会显示代码。
+- hidden-source-map
+  1. 与source-map相同，也会生成map文件，但是打包后的js最后没有map文件地址的引用。
+  2. 生产环境报错不会提示错误的行数、列数，source面板不会显示源代码目录结构和代码。
+### 通过sourcemap定位源码信息
+- 解析源码使用source-map插件，直接使用error信息的source字段对应的文件可能无法解析到源码(webpack分包情况下)，可以使用error的stack堆栈信息的第一条对应的文件进行解析。
+- 使用error-stack-parser插件解析error的stack堆栈信息。
+```
+const sourceMap = require("source-map");
+const ErrorStackParser = require('error-stack-parser');
+const fs = require("fs");
 
-- source-map (生产环境建议使用)
-> 打包速度慢，包含代码行、列映射。
+// 解析错误堆栈信息(errorStack为js错误信息的stack字段内容)
+const errorStackData = ErrorStackParser.parse(new Error(errorStack));
+const { fileName, lineNumber, columnNumber } = errorStackData?.[0] || {};
+if (fileName.split('/').pop()) {
+  // 读取对应的.js.map文件
+  const mapObj = fs.readFileSync(`${__dirname}/../public/static/js/${fileName.split('/').pop()}.map`, 'utf-8');
+  const consumer = await new sourceMap.SourceMapConsumer(mapObj);
+  // 根据报错信息映射出报错的源文件和错误的行数、列数
+  const originalInfo = consumer.originalPositionFor({ line: lineNumber, column: columnNumber });
+  // 获取报错源文件的代码
+  const sourceCode = consumer.sourceContentFor(originalInfo.source);
+  // 错误源码信息
+  const errorSource = {
+    ...originalInfo,
+    sourceCode,
+  }
+}
+```
+### 浏览器中sourcemap生效
+> 浏览器默认会开启sourcemap，如果没有开启可以通过 settings => preferences => enable javascript source map 开启sourcemap。
 
-### sourcemap如何生效
-- 浏览器
-> settings => preferences => enable javascript source map
-
+### sentry上传sourcemap文件
 - [sentry](https://juejin.cn/post/7209648356530962489#heading-10)

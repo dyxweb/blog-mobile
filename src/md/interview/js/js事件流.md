@@ -144,3 +144,5 @@ document.body.onclick = function(event) {
 ### 阻止事件传播
 1. 阻止冒泡：stopPropagation()；IE下：cancelBubble = true。
 2. 默认事件阻止：preventDefault()；IE下：window.event.returnValue = false。
+### 获取元素绑定的事件getEventListeners
+- getEventListeners(window) 获取window上绑定的事件。

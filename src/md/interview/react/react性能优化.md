@@ -88,6 +88,8 @@ export default Children;
 ```
 ### 更快的完成Diff比较
 #### 列表项使用稳定唯一的key属性。
+#### 尽量保持节点的类型一致，如果更新前后节点类型不一致的话无论有多少子组件将全部卸载重新创建。
+#### 条件渲染时不要去破坏结构，尽量使用空节点来保持前后结构顺序的统一。
 ### 通用优化
 #### 减少波及范围，无关刷新数据不存入State中
 - 在class组件可以使用类组件的实例属性存储无关刷新的数据。
@@ -145,7 +147,7 @@ export default class Home extends Component {
     document.getElementById('dyx')?.addEventListener('click', this.buttonClick)
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     document.getElementById('dyx')?.removeEventListener('click', this.buttonClick)
   }
 
@@ -189,7 +191,7 @@ export default class Home extends Component {
     document.getElementById('dyx')?.addEventListener('click', this.buttonClick)
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     document.getElementById('dyx')?.removeEventListener('click', this.buttonClick)
   }
 

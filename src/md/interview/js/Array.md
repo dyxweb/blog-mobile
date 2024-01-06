@@ -193,44 +193,6 @@ const unique = arr => {
   return newArr; 
 }
 ```
-### 数组排序
-#### 冒泡排序
-```
-// 相邻元素的比较
-const sort = arr => {
-  for(var i = 0; i < arr.length; i++){
-    for(j = i; j < arr.length; j++){
-      if(arr[i] < arr[j]){ // 大于小于号决定数组排序的规则
-        var oo;
-        oo = arr[j];
-        arr[j] = arr[i];
-        arr[i] = oo;
-      }
-    }
-  }
-  return arr;
-}
-```
-#### 选择排序
-```
-// 寻找最小(大)的值然后进行排序
-const sort = arr => {
-  const len = arr.length;
-  var minIndex, temp;
-  for (var i = 0; i < len - 1; i++) {
-	  minIndex = i;
-	  for (var j = i + 1; j < len; j++) {
-	    if (arr[j] < arr[minIndex]) { // 寻找最小的数
-		    minIndex = j; // 将最小数的索引保存
-	    }
-	  }
-	  temp = arr[i];
-	  arr[i] = arr[minIndex];
-	  arr[minIndex] = temp;
-  }
-  return arr;
-}
-```
 ### 数组最大最小值
 ```
 for(var i = 0; i < arr.length; i++) {

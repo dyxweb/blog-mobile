@@ -19,7 +19,7 @@ function doStuff(){
 } 
 setInterVal(doStuff, 100);
 ```
-### 两种setInterval区别
+### setInterval和setTimeout实现的setInterval区别
 ![setTimeout和setInterval](./img/setTimeout和setInterval.png)
 > setInterval每个定时器之间的间隔是100ms，而setTimeout每隔100ms执行一次doStuff，所以每个定时器之间的间隔是100 + T(doStuff执行时间为T)；T的时间不同导致的区别也不同。
 

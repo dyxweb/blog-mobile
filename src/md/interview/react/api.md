@@ -29,8 +29,8 @@ function MyComponent() {
 }
 ```
 #### Fragment
-- react不允许一个组件返回多个节点元素，为了避免增加额外的dom节点，使用Fragment元素包裹即可。
-- 相较于<></>形式Fragment可以支持key属性。
+- react不允许一个组件返回多个节点元素，使用Fragment元素包裹不会增加新的DOM节点。
+- 相较于<></>形式Fragment可以支持key、ref属性。
 - map遍历后的元素，react底层会处理，默认在外部嵌套一个Fragment元素
 #### Profiler
 - 用于开发阶段性能检测，检测一次react组件渲染用时性能开销。

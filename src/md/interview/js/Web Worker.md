@@ -1,6 +1,49 @@
 ## Web Worker
-> 由于JS是单线程的，当需要对大量数据进行计算操作时，大量复杂的JS运算会独占主线程，导致页面的其他事件无法及时响应，造成页面假死的现象。可以使用Web Worker把复杂的JS操作单独放在一个线程里。创建Worker时，JS引擎向浏览器申请开一个子线程（子线程是浏览器开的，完全受主线程控制，而且不能操作DOM）JS引擎线程与worker线程间通过特定的方式通信（postMessage API，需要通过序列化对象来与线程交互特定的数据）。
+- 由于JavaScript是单线程的，当执行比较耗时的任务时，就会阻塞主线程并导致页面无法响应。
+- Web Worker允许在一个单独的线程中执行耗时的任务，这使得JavaScript代码可以在后台执行，而不会阻塞主线程并导致页面无响应。
+- Web Worker是一个作为后台线程运行的脚本，具有自己的引擎实例和事件循环。它与主执行线程并行运行，并且不会阻塞事件循环。
+### Web Worker与主线程的区别
+- Web Worker没有访问DOM的权限，这意味着它不能直接操作页面上的HTML元素与用户交互。Web Worker被设计用于执行不需要直接访问UI的任务，例如数据处理、图像操作或计算。
+- Web Worker被设计为在与主线程分离的沙箱环境中运行，这意味着它们对系统资源的访问受到限制，并且不能访问某些API如localStorage或sessionStorageAPI。Web Worker可以通过消息传递系统与主线程进行通信，从而允许两个线程之间交换数据。
 
+### Web Worker客户端使用
+1. 创建一个新的JavaScript文件，其中包含要运行的代码(耗时任务)。该文件不应包含对DOM的引用，因为在Web Worker中无法访问DOM。
+2. 在主JavaScript文件中，使用Worker构造函数创建一个新的worker对象。此构造函数接收一个参数，即在步骤1中创建的JavaScript文件的URL。
+```
+const worker = new Worker('worker.js');
+```
+3. 向worker对象添加事件监听以处理主线程和Web Worker之间发送的消息。onmessage用于处理从Web Worker发送来的消息，postMessage用于向Web Worker发送消息。
+```
+worker.onmessage = function(event) {
+  console.log('Worker: ' + event.data);
+};
+
+worker.postMessage('Hello, worker!');
+```
+4. 在Web Worker的JavaScript文件中，使用self对象的onmessage属性添加事件监听来处理从主线程发来的消息，postMessage用于向主线程发送消息。
+```
+self.onmessage = function(event) {
+  console.log('Main: ' + event.data);
+  self.postMessage('Hello, Main!');
+};
+```
+### 终止Web Worker
+- 使用terminate()函数来终止。
+```
+// 主JavaScript文件中终止Web Worker
+worker.terminate();
+```
+- 通过调用self上的close()函数使其自行终止。
+```
+// Web Worker自行终止
+self.close();
+```
+### 使用onerror函数来处理Web Worker抛出的错误
+```
+worker.onerror = function(err) {
+  console.log("遇到错误")
+}
+```
 ### JS引擎计算
 > 点击btn1时，js会进行大量计算，发现页面卡死了，点击input不会有任何反应。
 

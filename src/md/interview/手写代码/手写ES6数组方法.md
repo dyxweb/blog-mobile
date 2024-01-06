@@ -5,7 +5,7 @@ Array.prototype.myForEach = function(callback, thisArg) {
   if (!((typeof callback === 'Function' || typeof callback === 'function') && this)) {
     throw new TypeError();
   }
-  const arr = Object(this);  // this 就是调用当前方法的数组
+  const arr = Object(this);  // this是调用当前方法的数组
   const len = arr.length >>> 0;  // 转换为正整数
   let i = 0;
   while (i < len) {
@@ -29,7 +29,7 @@ Array.prototype.myMap = function(callback, thisArg) {
   if (!((typeof callback === 'Function' || typeof callback === 'function') && this)) {
     throw new TypeError();
   }
-  const arr = Object(this)  // this 就是调用当前方法的数组
+  const arr = Object(this)  // this是调用当前方法的数组
   const len = arr.length >>> 0  // 转换为正整数
   let i = 0
   let res = []
@@ -53,7 +53,7 @@ Array.prototype.myFilter = function(callback, thisArg) {
   if (!((typeof callback === 'Function' || typeof callback === 'function') && this)) {
     throw new TypeError();
   }
-  const arr = Object(this)  // this 就是调用当前方法的数组
+  const arr = Object(this)  // this是调用当前方法的数组
   const len = arr.length >>> 0  // 转换为正整数
   let i = 0
   let res = [] // 返回值
@@ -79,7 +79,7 @@ Array.prototype.mySome = function(callback, thisArg) {
   if (!((typeof callback === 'Function' || typeof callback === 'function') && this)) {
     throw new TypeError();
   }
-  const arr = Object(this)  // this 就是调用当前方法的数组
+  const arr = Object(this)  // this是调用当前方法的数组
   const len = arr.length >>> 0  // 转换为正整数
   let i = 0
   while (i < len) {
@@ -99,7 +99,7 @@ const res = arr.mySome((item, index, arr) => item > 1)
 const res1 = [].mySome((item, index, arr) => item > 1)
 console.log(arr)
 console.log(res)
-console.log(res1) // 空数组使用返回 false
+console.log(res1) // 空数组使用返回false
 ```
 ### every
 ```
@@ -127,7 +127,7 @@ const res = arr.myEvery((item, index, arr) => item > 1)
 const res1 = [].myEvery((item, index, arr) => item > 1)
 console.log(arr)
 console.log(res)
-console.log(res1) // 空数组使用返回 true
+console.log(res1) // 空数组使用返回true
 ```
 ### reduce
 ```
@@ -135,7 +135,7 @@ Array.prototype.myReduce = function(callback, initialValue) {
   if (!((typeof callback === 'Function' || typeof callback === 'function') && this)) {
     throw new TypeError();
   }
-  const arr = Object(this)  // this 就是调用当前方法的数组
+  const arr = Object(this)  // this是调用当前方法的数组
   const len = arr.length >>> 0  // 转换为正整数
   let i = 0, res
   

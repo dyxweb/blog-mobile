@@ -8,7 +8,7 @@
 - 在浏览器每一帧的时间中，预留一些时间给JS线程，React利用这部分时间更新组件，当预留的时间不够用时，React将线程控制权交还给浏览器使其有时间渲染UI，React则等待下一帧时间到来继续被中断的工作。
 - 这种将长任务分拆到每一帧中，一次执行一小段任务的操作，被称为时间切片。而时间切片的关键是将同步的更新变为可中断的异步更新。
 ### react16之前
-- 在react16引入Fiber架构之前，react会采用递归对比虚拟DOM树，找出需要变动的节点，然后同步更新它们，这个过程react称为reconcilation(协调阶段)。
+- 在react16引入Fiber架构之前，react会采用递归对比虚拟DOM树(深度优先遍历)，找出需要变动的节点，然后同步更新它们，这个过程react称为reconcilation(协调阶段)。
 - 在reconcilation期间，react会一直占用浏览器资源，会导致用户触发的事件得不到响应。
 ### react16将同步的更新变为可中断的异步更新，如何解决中断更新时DOM渲染不完全的问题
 - 在React16中，Reconciler与Renderer不再是交替工作。当Scheduler将任务交给Reconciler后，Reconciler会为变化的虚拟DOM打上代表增/删/更新的标记。
@@ -23,6 +23,10 @@
 - 在React中最多会同时存在两棵Fiber树。当前屏幕上显示内容对应的Fiber树称为current Fiber树，正在内存中构建的Fiber树称为workInProgress Fiber树。
 - current Fiber树中的Fiber节点被称为current fiber，workInProgress Fiber树中的Fiber节点被称为workInProgress fiber，他们通过alternate属性连接，在处理workInProgress Fiber树的时候，能够获得current Fiber树的信息。
 ### Fiber出来之后，vdom的作用只是作为蓝本进行构建Fiber树。
+### element、fiber和DOM元素的关系
+- element对象就是我们的jsx代码，上面保存了props、key、children等信息。
+- DOM元素就是最终呈现给用户展示的效果。
+- fiber就是充当element和DOM元素的桥梁，只要elemnet发生改变，就会通过fiber做一次调和，使对应的DOM元素发生改变。
 ### 示例
 ```
 import React from "react";

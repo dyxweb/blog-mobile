@@ -2,7 +2,7 @@
 ### setState自动批处理
 - 自动批处理是指React将多次setState会被合并为1次执行。
 - 在React 18之前，React只会在合成事件和生命周期钩子函数中使用批处理，而在Promise、setTimeout、setInterval、原生事件是不会自动批处理的。
-- 在React 18中所有的状态更新都会自动使用批处理。如果在某种场景下不想使用批处理，可以通过flushSync来强制立即执行(比如需要在状态更新后，立刻读取新DOM上的数据等)
+- 在React 18中所有的状态更新都会自动使用批处理。如果在某种场景下不想使用批处理，可以通过flushSync来强制立即执行(比如需要在状态更新后，立刻读取新DOM上的数据等)。
 ```
 import React, { useState } from "react";
 import { flushSync } from "react-dom";
@@ -67,7 +67,7 @@ root.unmount();
 - react18引入的新特性全部基于现代浏览器，如需支持需要退回到react17版本。
 ### react组件返回值更新
 - 在react17中，返回空组件只能返回null，显式返回undefined会报错。
-- 在react18中，支持null和undefined返回。
+- 在react18中，支持null和undefined返回。因为在Suspense中允许fallback为undefined，所以为了保持一致性所以允许返回undefined。
 ### strict mode更新
 - 当使用严格模式时，React会对每个组件返回两次渲染，以便观察一些意想不到的结果。
 - 在react17中去掉了一次渲染的控制台日志，以便让日志容易阅读。react18取消了这个限制，第二次渲染会以浅灰色出现在控制台日志。

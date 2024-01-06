@@ -51,5 +51,5 @@ const getStatus = async() => {
 import dsBridge from 'dsbridge';
 
 // 判断方法是否存在
-dsBridge.hasNativeMethod('')
+dsBridge.hasNativeMethod('getStatusBarHeight');
 ```

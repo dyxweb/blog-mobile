@@ -83,7 +83,7 @@
 }
 ```
 - module
-> 指明tsc编译后的代码应该符合何种模块化方案，可以指定的枚举值有：none, commonjs, amd, system, umd, es2015, es2020, ESNext，默认值为 none。可以设置allowSyntheticDefaultImports字段为true，来允许合成默认导入。
+> 指明tsc编译后的代码应该符合何种模块化方案，可以指定的枚举值有：none, commonjs, amd, system, umd, es2015, es2020, ESNext，默认值为none。可以设置allowSyntheticDefaultImports字段为true，来允许合成默认导入。
 
 ```
 {
@@ -131,7 +131,7 @@ import Toast from '@/components/Toast.ts' // 模块实际位置: src/components/
 import TestModule from 'moduleA/index.js' // 模块实际位置: src/libs/moduleA/index.js
 ```
 - rootDir
-> 指定TypeScript识别读取的根目录。"rootDir": "./src"，则src目录下的TS文件不能引用src目录以外的ts文件，一般我们会设置为./src或 ./（即 tsconfig.json 所在目录）
+> 指定TypeScript识别读取的根目录。"rootDir": "./src"，则src目录下的TS文件不能引用src目录以外的ts文件，一般我们会设置为./src或 ./（即 tsconfig.json所在目录）
 
 ```
 {

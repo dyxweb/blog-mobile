@@ -71,5 +71,5 @@ deploy:
 > build之前设置CI=false
 
 ```
-"build": "set \"CI=false\" && node scripts/build.js",
+"build": "set \"CI=false\" && webpack --config config/webpack.prod.js",
 ```

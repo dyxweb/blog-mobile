@@ -3,11 +3,10 @@
 
 - GUI：更侧重易用性，用户通过点击图形界面，完成相关操作。
 - CLI：更侧重操作效率，通过命令组合自动化操作、批量操作等。
-
 ### Node CLI开发
 1. npm init初始化项目。
 2. 定义js命令文件
-> 文件头部必须有#!/usr/bin/env node，告诉系统使用NodeJS执行脚本；如不声明默认按shell去解析执行。
+> 文件头部必须有#!/usr/bin/env node，告诉系统使用NodeJS执行脚本，如不声明默认按shell去解析执行。
 
 ```
 #!/usr/bin/env node

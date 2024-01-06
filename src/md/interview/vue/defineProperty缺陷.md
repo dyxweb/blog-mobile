@@ -33,6 +33,6 @@ vm.items.length = 2;
 ```
 ### proxy
 - proxy代理的是整个对象，而不是对象的某个特定属性，不需要我们通过遍历来逐个进行数据绑定。
-- proxy 在遇到一个对象的属性还是一个对象的情况下，不需要递归监听，Object.defineProperty需要递归监听。
+- proxy在遇到一个对象的属性还是一个对象的情况下不需要递归监听，Object.defineProperty需要递归监听。
 - proxy可以直接监听数组的变化。
 - proxy提供了更丰富的拦截方式。
