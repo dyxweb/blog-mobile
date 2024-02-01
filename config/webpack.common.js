@@ -10,8 +10,8 @@ module.exports = {
   entry: path.resolve(__dirname, '../src/index.tsx'),
   // 打包出口配置
   output: {
-    publicPath: '/',
-    path: path.resolve(__dirname, '../build'),
+    publicPath: process.env.NODE_ENV === 'production' ? 'https://dyxweb.github.io/blog-mobile/' : '/',
+    path: path.resolve(__dirname, '../docs'),
     filename: 'static/js/[name].[contenthash:8].js',
     clean: true
   },

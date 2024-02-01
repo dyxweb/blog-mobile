@@ -10,7 +10,9 @@ import My from '@/pages/my';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      basename={process.env.NODE_ENV === 'production' ? '/blog-mobile' : '/'}
+    >
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to="/blog" />} />
