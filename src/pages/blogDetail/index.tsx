@@ -11,6 +11,7 @@ import rehypeRaw from 'rehype-raw';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import 'github-markdown-css';
+import Layer from '@/components/layer';
 import NavList from './components/navList';
 import styleConfig from '@/styles/common.scss';
 import styles from './index.scss';
@@ -24,7 +25,7 @@ const BlogDetail = () => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     require(`../../md/interview/${category}/${blog}.md`).default; // 获取到的文档内容
   return (
-    <div className={styles.blogDetail}>
+    <Layer className={styles.blogDetail}>
       <NavBar
         onBack={() => navigate(-1)}
         right={
@@ -65,7 +66,7 @@ const BlogDetail = () => {
         </ReactMarkdown>
       </div>
       <NavList onClose={() => setNavVisible(false)} visible={navVisible} />
-    </div>
+    </Layer>
   );
 };
 

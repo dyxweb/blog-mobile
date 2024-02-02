@@ -16,10 +16,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to="/blog" />} />
-          <Route path="blog" element={<BlogList />} />
+          <Route path="blog" element={<BlogList />}>
+            <Route path=":category/:blog" element={<BlogDetail />} />
+          </Route>
           <Route path="my" element={<My />} />
         </Route>
-        <Route path="/blog/:category/:blog" element={<BlogDetail />} />
       </Routes>
     </BrowserRouter>
   );

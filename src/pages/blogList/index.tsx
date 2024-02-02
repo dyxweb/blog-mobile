@@ -2,8 +2,9 @@
  * 文章列表
  */
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { Collapse, List } from 'antd-mobile';
+import Layer from '@/components/layer';
 
 const mdData = require.context('../../md/interview', true, /\.md$/);
 const menuConfig: any = [];
@@ -39,21 +40,29 @@ const BlogList = () => {
     navigate(`/blog${key}`);
   };
   return (
-    <Collapse accordion>
-      {menuConfig.map((category: any) => {
-        const { key, title, children = [] } = category;
-        console.log();
-        return (
-          <Collapse.Panel key={key} title={title}>
-            {children.map((blog: any) => (
-              <List.Item key={blog.key} onClick={() => onBlogClick(blog.key)}>
-                {blog.title}
-              </List.Item>
-            ))}
-          </Collapse.Panel>
-        );
-      })}
-    </Collapse>
+    <div>
+      <Layer>
+        <Collapse accordion>
+          {menuConfig.map((category: any) => {
+            const { key, title, children = [] } = category;
+            console.log();
+            return (
+              <Collapse.Panel key={key} title={title}>
+                {children.map((blog: any) => (
+                  <List.Item
+                    key={blog.key}
+                    onClick={() => onBlogClick(blog.key)}
+                  >
+                    {blog.title}
+                  </List.Item>
+                ))}
+              </Collapse.Panel>
+            );
+          })}
+        </Collapse>
+      </Layer>
+      <Outlet />
+    </div>
   );
 };
 
