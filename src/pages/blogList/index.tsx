@@ -1,10 +1,11 @@
 /**
  * 文章列表
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { Collapse, List } from 'antd-mobile';
 import Layer from '@/components/layer';
+import styleConfig from '@/styles/common.scss';
 
 const mdData = require.context('../../md/interview', true, /\.md$/);
 const menuConfig: any = [];
@@ -33,19 +34,21 @@ mdData.keys().forEach((item: any) => {
 });
 
 const BlogList = () => {
+  const [activeKey, setActiveKey] = useState(''); // 点击的目录key
   const navigate = useNavigate();
 
   // 点击文章标题跳转
   const onBlogClick = (key: string) => {
+    setActiveKey(key);
     navigate(`/blog${key}`);
   };
+
   return (
     <div>
       <Layer>
         <Collapse accordion>
           {menuConfig.map((category: any) => {
             const { key, title, children = [] } = category;
-            console.log();
             return (
               <Collapse.Panel key={key} title={title}>
                 {children.map((blog: any) => (
@@ -53,7 +56,15 @@ const BlogList = () => {
                     key={blog.key}
                     onClick={() => onBlogClick(blog.key)}
                   >
-                    {blog.title}
+                    <div
+                      style={
+                        activeKey === blog.key
+                          ? { color: styleConfig.primaryColor }
+                          : {}
+                      }
+                    >
+                      {blog.title}
+                    </div>
                   </List.Item>
                 ))}
               </Collapse.Panel>
