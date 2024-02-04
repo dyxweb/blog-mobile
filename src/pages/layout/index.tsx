@@ -1,7 +1,7 @@
 /**
  * layout
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { TabBar } from 'antd-mobile';
 import { AppOutline, UserOutline } from 'antd-mobile-icons';
@@ -17,6 +17,11 @@ const Layout = () => {
     setActiveKey(key);
     navigate(key);
   };
+
+  // 监听location.pathname变化同步激活项
+  useEffect(() => {
+    setActiveKey(`/${location.pathname.split('/')[1]}`);
+  }, [location.pathname]);
 
   const tabs = [
     {

@@ -8,15 +8,22 @@ import Layer from '@/components/layer';
 import styleConfig from '@/styles/common.scss';
 
 const mdData = require.context('../../md/interview', true, /\.md$/);
-const menuConfig: any = [];
+interface MenuItem {
+  key: string;
+  title: string;
+}
+interface MenuConfig extends MenuItem {
+  children: MenuItem[];
+}
+const menuConfig: MenuConfig[] = [];
 // 根据目录动态生成导航数据
-mdData.keys().forEach((item: any) => {
+mdData.keys().forEach((item: string) => {
   const itemArr = item.split('/');
   const category = itemArr[1]; // 类目
   const blog = itemArr[2]?.replace('.md', ''); // 文章博客
   if (category && blog) {
     const findIndex = menuConfig.findIndex(
-      (menu: any) => menu.key === category
+      (menu: MenuItem) => menu.key === category
     );
     if (findIndex > -1) {
       menuConfig[findIndex].children.push({
@@ -47,11 +54,11 @@ const BlogList = () => {
     <div>
       <Layer>
         <Collapse accordion>
-          {menuConfig.map((category: any) => {
+          {menuConfig.map((category: MenuConfig) => {
             const { key, title, children = [] } = category;
             return (
               <Collapse.Panel key={key} title={title}>
-                {children.map((blog: any) => (
+                {children.map((blog: MenuItem) => (
                   <List.Item
                     key={blog.key}
                     onClick={() => onBlogClick(blog.key)}

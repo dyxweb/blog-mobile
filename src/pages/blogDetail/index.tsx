@@ -21,7 +21,7 @@ const BlogDetail = () => {
   const { category, blog } = useParams();
   const navigate = useNavigate();
 
-  const blogContent: any =
+  const blogContent: string =
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     require(`../../md/interview/${category}/${blog}.md`).default; // 获取到的文档内容
   return (
