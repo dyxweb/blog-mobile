@@ -87,3 +87,4 @@
 3. HTTP 页面响应速度比 HTTPS 快，主要是因为 HTTP 使用 TCP 三次握手建立连接，客户端和服务器需要交换 3 个包，而 HTTPS除了 TCP 的三个包，还要加上 ssl 握手需要的 9 个包，所以一共是 12 个包。
 4. http 和 https 使用的是完全不同的连接方式，用的端口也不一样，前者是 80，后者是 443。
 5. HTTPS 其实就是建构在 SSL/TLS 之上的 HTTP 协议，HTTPS 比 HTTP 要更耗费服务器资源。
+### https访问http资源会被浏览器block，http请求https资源没问题。

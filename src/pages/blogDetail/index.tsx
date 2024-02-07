@@ -12,7 +12,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import 'github-markdown-css';
 import Layer from '@/components/layer';
-import NavList from './components/navList';
+import NavList from '@/components/navList';
 import styleConfig from '@/styles/common.scss';
 import styles from './index.scss';
 

@@ -6,7 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from '@/pages/layout';
 import BlogList from '@/pages/blogList';
 import BlogDetail from '@/pages/blogDetail';
-import My from '@/pages/my';
+import MyList from '@/pages/myList';
+import MyDetail from '@/pages/myDetail';
 
 const App = () => {
   return (
@@ -19,7 +20,9 @@ const App = () => {
           <Route path="blog" element={<BlogList />}>
             <Route path=":category/:blog" element={<BlogDetail />} />
           </Route>
-          <Route path="my" element={<My />} />
+          <Route path="my" element={<MyList />}>
+            <Route path=":category/:blog" element={<MyDetail />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -140,6 +140,17 @@ document.body.onclick = function(event) {
   alert(event.eventPhase); // 3
 }
 ```
+### 自定义事件
+- 监听自定义prize事件
+```
+document.addEventListener('prize', () => {
+  // 监听prize事件
+})
+```
+- 触发自定义prize事件
+```
+document.dispatchEvent(new CustomEvent('prize'))
+```
 ### 同一个元素既有click事件又有addEventListener事件，点击之后两个事件都会触发，且先执行addEventListener的事件后执行click的事件。
 ### 阻止事件传播
 1. 阻止冒泡：stopPropagation()；IE下：cancelBubble = true。

@@ -140,5 +140,5 @@ weakMap.set(dyx, "test");
 // john 被从内存中删除了！
 dyx = null; // 覆盖引用
 ```
-
+### JSON.stringify方法不能转化Map数据类型。
 

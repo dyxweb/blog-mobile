@@ -36,3 +36,8 @@ vm.items.length = 2;
 - proxy在遇到一个对象的属性还是一个对象的情况下不需要递归监听，Object.defineProperty需要递归监听。
 - proxy可以直接监听数组的变化。
 - proxy提供了更丰富的拦截方式。
+### [proxy与defineProperty的性能对比](https://mp.weixin.qq.com/s/uVEe5tb4WJd0Zk1crYo35A)
+- Proxy在对象创建时的性能明显优于Object.defineProperty。
+- 在浅层对象的读写性能方面Object.defineProperty表现更好，但是当对象的嵌套深度增加时，Object.defineProperty的优势会逐渐减弱。
+- 在性能测试中Object.defineProperty的读写优势可能更适合实际开发场景，但Proxy的性能与Object.defineProperty并没有拉开太大差距。
+- Vue3选择Proxy不仅仅基于性能考量，还因为Proxy提供了更为友好、现代且强大的API，使得操作更加灵活。

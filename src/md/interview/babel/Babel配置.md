@@ -106,6 +106,11 @@ import 'core-js/stable';
 // 垫平所有ES6+ API，包括提案阶段
 import 'core-js';
 ```
+- 如果useBuiltIns设置为usage时在某些浏览器下特殊的API无法使用使用时可以单独在入口文件垫平特殊的API
+```
+// 特殊垫平Object.hasOwn方法
+import 'core-js/stable/object/has-own';
+```
 ### 开发一个第三方库可以这样配置
 - 安装依赖
 ```

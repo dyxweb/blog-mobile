@@ -15,7 +15,7 @@ const Layout = () => {
   // 点击切换路由
   const onTabBarChange = (key: string) => {
     setActiveKey(key);
-    navigate(key);
+    navigate(key, { replace: true });
   };
 
   // 监听location.pathname变化同步激活项

@@ -1,4 +1,7 @@
 ## yarn
+- 全局安装yarn  npm install -g yarn
+- 查看yarn安装版本  yarn -v
+### yarn全局安装依赖
 - 全局安装依赖  yarn global add package
 - 查看yarn全局安装过的依赖  yarn global list --depth=0
 ### yarn全局安装的依赖找不到
